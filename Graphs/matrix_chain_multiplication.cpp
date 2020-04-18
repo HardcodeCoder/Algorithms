@@ -2,7 +2,7 @@
  * @Author: hardcodecoder
  * @Date:   03:23:41 Saturday 18 April 2020
  * @Last modified by:   hardcodecoder
- * @Last modified time: 03:24:00 Saturday 18 April 2020
+ * @Last modified time: 03:35:03 Saturday 18 April 2020
  */
 
 
@@ -60,8 +60,9 @@
    printf("Enter the number of matrices in the chain: ");
    scanf("%d", &n);
 
-   // If no of dimensions is 1 gretaer
+   // No of dimensions is 1 gretaer
    // than number of matrices in the chain
+   // so increase n by 1
    n++;
 
    //Allocate memory for dimensions array
@@ -73,4 +74,9 @@
      scanf("%d", &dimensions[i]);
 
    printf("\nMinumum number of multiplications required: %d", computeMinimum(dimensions, n));
+
+   /*Test input
+    5
+    2 3 4 5 6 2
+   */
  }
