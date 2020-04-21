@@ -2,7 +2,7 @@
  * @Author: hardcodecoder
  * @Date:   02:42:59  Sunday 22 March 2020
  * @Last modified by:   hardcodecoder
- * @Last modified time: 05:47:11  Sunday 22 March 2020
+ * @Last modified time: 03:28:19 Tuesday 21 April 2020
  */
 
 
@@ -62,9 +62,9 @@ void sortEdgeList(struct Edge* edgeList, int n){
     edgeList[min] = temp;
   }
 
-  printf("\nSorted edges:\nSource\tDestination\tWeight\n");
+  /*printf("\nSorted edges:\nSrc\tDest\tWeight\n");
   for (int i=0;i<n;i++)
-    printf("%d\t\t%d\t\t%d\n", edgeList[i].src, edgeList[i].dest, edgeList[i].wt);
+    printf("%d\t%d\t%d\n", edgeList[i].src, edgeList[i].dest, edgeList[i].wt);*/
 }
 
 
@@ -95,9 +95,9 @@ void kruskal(struct Edge *edgeList, int v, int e){
     }
   }
   //Print mst
-  printf("\nPrinting MST:\nSrc\tDest\tWt\n");
+  printf("\nPrinting MST:\nSrc\tDest\tWeight\n");
   for (i = 0; i < mstIndex; i++)
-    printf(" %d  ---> %d   :  %d\n", mst[i].src, mst[i].dest, mst[i].wt);
+    printf(" %d  ---> %d   :    %d\n", mst[i].src, mst[i].dest, mst[i].wt);
 }
 
 
@@ -108,7 +108,7 @@ int main(){
   scanf("%d %d", &v, &e);
 
   struct Edge *edgeList = (struct Edge*)malloc(sizeof(struct Edge)*e);
-  printf("\nEnter the edge list in the format:\nSrc vertex\tDest vertex\tWt\n");
+  printf("\nEnter the edge list in the format:\nSrc\tDest\tWeight\n");
 
   for (int i = 0; i < e; i++){
     scanf("%d%d%d", &edgeList[i].src, &edgeList[i].dest, &edgeList[i].wt);
