@@ -2,13 +2,32 @@
  * @Author: hardcodecoder
  * @Date:   03:23:41 Saturday 18 April 2020
  * @Last modified by:   hardcodecoder
- * @Last modified time: 03:35:03 Saturday 18 April 2020
+ * @Last modified time: 04:32:50 Thursday 23 April 2020
  */
 
 
  #include<stdio.h>
  #include<stdlib.h>
  #include<limits.h>
+
+
+// Holds the breaking points for applying parenthesis
+int **brackets;
+// Character to represent matrices
+char ch = 'A';
+
+ // Method to print parenthesis arount the martices
+ void printSequence(int i,int j){
+ if (i == j)
+ printf("%c", ch++);
+ else
+    {
+       printf("(");
+       printSequence(i, brackets[i][j]);
+       printSequence(brackets[i][j] + 1, j);
+       printf(")");
+    }
+ }
 
 
  // Method to find minimum number of scaler multiplications
@@ -22,10 +41,16 @@
    // 0th row and 0th column is not used for simplicity
    int cost[n][n];
 
+   // allocate memory for pointer to pointer
+   brackets = (int**) malloc(sizeof(int*) * n );
+
    // Cost is zero for one multiplication
    // single matrix (no multiplication is required)
-   for (i = 0; i < n; i++)
+   // simaltaneously allocate memory for brackets array
+   for (i = 0; i < n; i++){
      cost[i][i] = 0;
+     brackets[i] = (int*) malloc(sizeof(int) * n);
+   }
 
    // Determines chaining length
    // first multiply two matrices together,
@@ -42,12 +67,16 @@
        // in group i
        for(k = i; k < j; k++){
          q = cost[i][k] + cost[k+1][j] + dimensions[i-1] * dimensions[k] * dimensions[j];
-         if (q < cost[i][j])
+         if (q < cost[i][j]){
            cost[i][j] = q;
+           brackets[i][j] = k;
+         }
        }
      }
    }
 
+   printf("\nSequence of matrix chain multiplication: ");
+   printSequence(1, n-1);
    return cost[1][n-1];
  }
 
