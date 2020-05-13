@@ -2,7 +2,7 @@
  * @Author: hardcodecoder
  * @Date:   02:30:40 Sunday 05 April 2020
  * @Last modified by:   hardcodecoder
- * @Last modified time: 03:22:46 Saturday 18 April 2020
+ * @Last modified time: 07:14:27 Wednesday 13 May 2020
  */
 
 
@@ -18,7 +18,7 @@ bool *visited;       // array to mark visited vertices
 
 
 // Helper method to find the minimum weighted
-// vertex from the current vertex
+// vertex which is not visited
 int minWeight(){
   int min = INF;
   int minIndex = -1;
@@ -69,7 +69,6 @@ void dijkstraShortestPath (int **graph, int src, int dest) {
   distance[src] = 0;
 
   for (int i = 0; i < numVertices-1; i++){
-
     // returns min weighted vertex from list of
     // non visited vertex adjacent to current vertex
     int min = minWeight();
@@ -79,10 +78,13 @@ void dijkstraShortestPath (int **graph, int src, int dest) {
 
     for (int v = 0; v < numVertices; v++){
 
-      // select new distance throught min if vertex is:
+      // Select new distance throught min if vertex is:
       // not visited, is adjacent to current vertex,
       // distance throught min is less than old distance
-      if (!visited[v] && graph[min][v] && distance[min] != INF && distance[min] + graph[min][v] < distance[v]){
+      if (!visited[v]
+        && graph[min][v] != 0 // 0 indicates non adjacent vertices in input matrix
+        && distance[min] != INF
+        && distance[min] + graph[min][v] < distance[v]){
         distance[v] = distance[min] + graph[min][v];
         previousVertex[v] = min;   // store the preceding vertex for vth vertex
       }
